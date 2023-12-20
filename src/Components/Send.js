@@ -1,14 +1,23 @@
-import { Card, CardContent } from "@mui/joy";
+import { Box, Card, CardContent } from "@mui/joy";
 import React, { useCallback, useState } from "react";
+import FileDrop from "./FileDrop";
+import DragDropFiles from "./FileDrop";
+import "./style.css"
 
 const Send = props => {
     const { room, socket } = props;
     const roomText = "Room: #" + room;
-    const [file, setFile] = useState({});
+    const [file, setFile] = useState();
 
-    const onFileChange = useCallback(files => setFile(files[0]), []);
+    const changeFile = (filename) => {
+        setFile(filename);
+    }
+
+    // const onFileChange = useCallback(files => setFile(files[0]), []);
     const sendFile = () => {
+        console.log('Sending file to Room: ', room);
         if (file) {
+            console.log('file: ',file);
             let reader = new FileReader();
             reader.onload = (a) => {
                 let buffer = new Uint8Array(reader.result);
@@ -35,8 +44,9 @@ const Send = props => {
 
 
         console.log("file size:", metadata.total_buffer_size);
+        console.log('Room: ', room);
         let chunk = buffer.slice(0, metadata.buffer_size);
-        while (chunk.length != 0) {
+        while (chunk.length !== 0) {
             console.log("chunk.length: ", chunk.length);
             buffer = buffer.slice(metadata.buffer_size, buffer.length);
             socket.emit("file-send", {
@@ -54,62 +64,19 @@ const Send = props => {
     }
 
     return (
-        <div>
-            <div>
-                <h2>Send File</h2>
-                <p>| { roomText } |</p>
-                <input placeholder="file" type="file" onChange={(e) => {
-                    setFile(e.target.files[0]);
-                }} />
-                <button onClick={sendFile}>
-                    Send
-                </button>
-            </div>
-            
+        <div className="fs-screen">
+            {file ? (
+                <div >
+                    <div className="uploads">
+                        <div className="file-container">
+                            <img className="file-icon" src="/file.svg" alt="file-logo" />
+                            <p className="file-text">{file.name}</p>
+                        </div>
+                    </div>
+                    <button className="fs-btn" onClick={sendFile}>Send</button>
+                </div>
+            ) : (<DragDropFiles changeFile={changeFile}></DragDropFiles>)}
         </div>
-        // <Card style={cardStyle}>
-        //     <Card.Body>
-        //         <Card.Title>{roomText}</Card.Title>
-        //         <Card.Subtitle className="mb-2 text-muted font-italic">
-        //             Click to add File.
-        //         </Card.Subtitle>
-        //         <hr />
-        //         <div>
-        //             {file && file.name ? (
-        //                 <InputGroup className="mb-3">
-        //                     <FormControl
-        //                         placeholder={file.name}
-        //                         aria-label={file.name}
-        //                         aria-describedby="file"
-        //                         disabled={true}
-        //                     />
-        //                     <InputGroup.Append>
-        //                         <button
-        //                             onClick={sendFile}
-        //                             disabled={!canUploadFile}
-        //                         >Send</button>
-        //                     </InputGroup.Append>
-        //                 </InputGroup>
-        //             ) : null}
-        //             {/* ıf the file is getting uploaded */}
-        //             {uploadPercentage > 0 ? (
-        //                 <DownloadProgressBar percentage={uploadPercentage} />
-        //             ) : null}
-        //             <Row>
-        //                 <Col />
-
-        //                 <Col style={colStyle}>
-        //                     {canUploadFile ? (
-        //                         <InputFiles onChange={onFileChange}>
-        //                             <span style={plusStyle}>+</span>
-        //                         </InputFiles>
-        //                     ) : null}
-        //                 </Col>
-        //                 <Col />
-        //             </Row>
-        //         </div>
-        //     </Card.Body>
-        // </Card>
     );
 }
 

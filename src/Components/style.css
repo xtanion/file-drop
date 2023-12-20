@@ -1,0 +1,236 @@
+:root {
+    /* tokyo night */
+    --black: #000000;
+    --white: #ffffff;
+    --background: #0e0e11;
+    --elem-background: #24283b;
+    --tokyo-border: #dde0ec;
+    --tokyo-text: var(--white);
+    --tokyo-comment: #e0e5fd;
+    --tokyo-container: #1b1b1f;
+    --tokyo-button: #565f89;
+    --tokyo-red: #f7768e;
+    --tokyo-orange: #ff9e64;
+    --tokyo-yellow: #e0af68;
+    --tokyo-white: rgb(255, 255, 255);
+    --foreground: #e0e5fd;
+    --tokyo-magenta: #bb9af7;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    /* background: #f5f5f5; */
+    background: var(--background);
+    font-family: "Lato", "Inter", sans-serif;
+}
+
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+}
+
+.app {
+    position: fixed;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    border-left: 1px solid var(--background);
+    border-right: 1px solid var(--background);
+    background: var(--background);
+}
+
+.join-code {
+    color: var(--tokyo-text);
+    padding: 5px;
+    align-items: center;
+    align-content: center;
+}
+
+.join-p {
+    margin: 10px;
+    font-size: 12px;
+    color:var(--tokyo-comment);
+    text-align: center;
+}
+.join-name {
+    color: var(--tokyo-text);
+    margin: 10px;
+    text-align: center;
+}
+
+.join-ipt {
+    width: 100%;
+    color: var(--tokyo-comment);
+    font-weight: 900;
+    font-size: 24px;
+    padding: 4px;
+    flex-grow: 1;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    margin-right: 8px;
+}
+
+.join-btn {
+    margin: 5px;
+    height: 40px;
+    width: 94px;
+    background-color: var(--tokyo-button);
+    color: var(--tokyo-text);
+    border-style: none;
+    border-radius: 0px;
+}
+
+.join-btn:hover {
+    background-color: var(--tokyo-magenta);
+    color: var(--tokyo-text);
+    transition: 0.5s;
+}
+.join-btn:active {
+    background-color: #000;
+    color: #fff;
+    transform:scale(1.1);
+    transition: 0.5s;
+}
+
+.join-screen {
+    padding: 20px;
+}
+
+.join-screen .join-input {
+    width: 100%;
+    border: 1px dashed var(--tokyo-border);
+}
+
+.fs-screen {
+    padding: 20px;
+}
+
+.fs-screen .file-input {
+    width: 100%;
+    border: 1px solid var(--tokyo-border);
+}
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background-color: var(--tokyo-container);
+    color: var(--tokyo-comment);
+    border-radius: 0px;
+    height: 60px;
+    padding: 0px 3px 0px 8px;
+}
+
+.fs-screen .file-input label {
+    display: block;
+    width: 100%;
+    padding: 40px 50px;
+    text-align: center;
+    background: var(--tokyo-container);
+    color: var(--tokyo-comment);
+    font-size: 18px;
+}
+
+.fs-screen .file-input input {
+    display: none;
+}
+
+.fs-screen .files-list {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.fs-screen .files-list .title {
+    width: 100%;
+    margin: 20px 0px;
+}
+
+.fs-screen .files-list .item {
+    width: 33%;
+    min-width: 200px;
+    border: 1px solid #eee;
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.05);
+}
+
+.fs-screen .files-list .item .progress {
+    padding: 30px;
+    text-align: center;
+    font-size: 50px;
+    color: #222;
+}
+
+.fs-screen .files-list .item .filename {
+    padding: 5px;
+    font-size: 18px;
+    border-top: 1px solid #eee;
+}
+
+.fs-btn {
+    margin-top: 2px;
+    height: 40px;
+    width: 100%;
+    background-color: var(--tokyo-button);
+    color: var(--white);
+    border-style: 1px solid var(--tokyo-border);
+    border-radius: 0px;
+}
+
+.fs-btn:hover {
+    background: var(--tokyo-magenta);
+    transition: 0.5s;
+}
+
+.fs-btn:active {
+    border: 1px solid var(--tokyo-border);
+    background-color: var(--tokyo-magenta);
+    color: var(--tokyo-container);
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+
+.rs-screen {
+    width: auto;
+    min-height: 200px;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid var(--tokyo-border);
+}
+
+.file-container {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    height: 40px;
+    width: 100%;
+    border: 1px solid var(--tokyo-border);
+    align-items: start;
+}
+.file-icon {
+    height: 100%;
+}
+.file-text {
+    height: 100%;
+    margin: 5px;
+    position: relative;
+    display: inline-block;
+    font-size: 16px;
+    color: var(--tokyo-comment);
+    text-align: center;
+    vertical-align: middle;
+}

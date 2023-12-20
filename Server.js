@@ -22,9 +22,12 @@ io.on("connection", (socket) => {
 
     socket.on("join-room", (data) => {
         socket.join(data);
+        console.log('User joined room: ', data);
+        console.log("Now in rooms: ", socket.rooms);
     });
 
     socket.on("file-meta", function (data) {
+        console.log('Server uid: ', data.uid);
         socket.to(data.uid).emit("rs-meta", data.metadata);
     });
 
