@@ -59,8 +59,13 @@ const Send = props => {
             });
             chunk = buffer.slice(0, metadata.buffer_size);
         };
+        // setFile(null);
         console.log("-- Sent File Successfully")
 
+    }
+
+    const resetFile = () => {
+        setFile(null);
     }
 
     return (
@@ -68,9 +73,10 @@ const Send = props => {
             {file ? (
                 <div >
                     <div className="uploads">
-                        <div className="file-container">
+                        <div className="file-container" onClick={resetFile}>
                             <img className="file-icon" src="/file.svg" alt="file-logo" />
                             <p className="file-text">{file.name}</p>
+                            <img className="refresh-icon" src="/refresh.svg" alt="refresh-file"/>
                         </div>
                     </div>
                     <button className="fs-btn" onClick={sendFile}>Send</button>

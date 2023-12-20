@@ -4,7 +4,7 @@ A simple implementation of Sockets to share files between two devices.
 ## Installation
 You must have `npm` and `node` preinstalled. 
 Libraries used: 
-* `React`: Frontend with `tokyo-night` theme/color-scheme (it's not very beautiful, but it;s okay).
+* `React`: Frontend with [`tokyo-night`](https://github.com/enkia/tokyo-night-vscode-theme) theme/color-scheme (it's not very beautiful, but it;s okay).
 * `Express`: Backend
 * `Socket.io`: For connecting and emitting to the sockets (very cool).
 * `nodemon` : idk, it's easier that way (you dont have to run the searver each time manually)

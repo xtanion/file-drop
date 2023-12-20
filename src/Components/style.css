@@ -142,6 +142,7 @@ body {
     background: var(--tokyo-container);
     color: var(--tokyo-comment);
     font-size: 18px;
+    cursor: pointer;
 }
 
 .fs-screen .file-input input {
@@ -220,9 +221,19 @@ body {
     width: 100%;
     border: 1px solid var(--tokyo-border);
     align-items: start;
+    cursor: pointer;
 }
 .file-icon {
     height: 100%;
+}
+.refresh-icon {
+    height: 100%;
+    padding: 5px;
+    color: var(--tokyo-comment);
+}
+.refresh-icon:hover {
+    transform: rotateZ(360deg);
+    transition: 0.5s;
 }
 .file-text {
     height: 100%;
