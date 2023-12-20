@@ -30,7 +30,7 @@ const Receive = props => {
         let counter = 0;
 
         socket.on("rs-meta", data => {
-            setMeta(data);
+            // setMeta(data);
             // do something about useState for metadata
             filedata.metadata = data;
             filedata.transmitted = 0;
