@@ -20,6 +20,10 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
     console.log(`User Connected: ${socket.id}`);
 
+    socket.on("broadcast-room", (data) => {
+        console.log('braodcast room: ', data);
+        socket.broadcast.emit('broadcast', data);
+    })
     socket.on("join-room", (data) => {
         socket.join(data);
         console.log('User joined room: ', data);

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import io from "socket.io-client";
 import './style.css'
 
@@ -7,13 +7,18 @@ const RandomRoom =() => {
 }
 
 const CreateRoom = (props) => {
-    const { getRoom } = props;
+    const { getRoom, room} = props;
     const [roomCode, setRoomCode] = useState('')
-    if (roomCode == "") {
-        var room = RandomRoom();
-        setRoomCode(room);
-        // getRoom(room);
-    }
+
+    useEffect(() => {
+        if (room != '') {
+            setRoomCode(room.toString());
+            console.log("default room created");
+        } else {
+            var r = RandomRoom();
+            setRoomCode(r);
+        }
+    }, [room]);
 
     const handleChange = (e) => {
         setRoomCode(e.target.value)

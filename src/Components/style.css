@@ -245,3 +245,25 @@ body {
     text-align: center;
     vertical-align: middle;
 }
+.js-screen {
+    width: auto;
+    min-height: 80px;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid var(--tokyo-border);
+}
+.js-name {
+    color: var(--tokyo-comment);
+    margin: 5px;
+    text-align: left;
+}
+.chip {
+    display: inline-block;
+    padding: 5px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 25px;
+    background-color: var(--tokyo-comment);
+}

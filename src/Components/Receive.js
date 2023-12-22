@@ -53,8 +53,8 @@ const Receive = props => {
             } else {
                 socket.emit("fs-start", room);
             }
-        }, [room, socket])
-    });
+        })
+    }, [room, socket]);
 
     return (
         <div className="rs-screen">

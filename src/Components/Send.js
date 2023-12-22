@@ -16,7 +16,7 @@ const Send = props => {
     // const onFileChange = useCallback(files => setFile(files[0]), []);
     const sendFile = () => {
         console.log('Sending file to Room: ', room);
-        if (file) {
+        if (file && socket) {
             console.log('file: ',file);
             let reader = new FileReader();
             reader.onload = (a) => {
