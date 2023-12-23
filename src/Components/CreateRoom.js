@@ -39,7 +39,7 @@ const CreateRoom = (props) => {
 
             <div className="join-input">
                 <div className="container">
-                    <input type="text" placeholder={roomCode} className="join-ipt" onChange={handleChange}/>
+                    <input type="text" placeholder={roomCode} className="join-ipt" onChange={handleChange} autoFocus/>
                     <button className="join-btn" onClick={buttonHandle}>Join Room</button>
                 </div>
             </div>

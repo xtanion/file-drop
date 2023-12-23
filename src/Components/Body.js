@@ -8,6 +8,9 @@ import CreateRoom from "./CreateRoom";
 
 import './style.css'
 import Nearby from "./Nearby";
+import Footer from "./Footer";
+
+const SERVER_URL = "http://localhost:5000"
 
 const RandomRoom = () => {
     return (Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000).toString();
@@ -38,8 +41,16 @@ const Body = props => {
         }
     };
 
+    const connectNearby = () => {
+        if (nearby != []) {
+            joinRoom(nearby[0]);
+            setRoom(nearby[0]);
+            setNearby([]);
+        }
+    }
+
     useEffect(() => {
-        socketRef.current = io.connect("http://localhost:5000");
+        socketRef.current = io.connect(SERVER_URL, { rejectUnauthorized: false });
 
         if (room == '') {
             var r = RandomRoom();
@@ -61,15 +72,16 @@ const Body = props => {
         <div className="centered-div">
             {joined ?
                 <div className="join-screen">
-                    <h2 className="join-name">You have Joined: {room}</h2>
+                    <h2 className="join-name">You have Joined: <span style={{color: "#bb9af7"}}>{room}</span></h2>
                     <p className="join-p">refresh page to establish a new connection</p>
                 </div>
                 :
                 <CreateRoom getRoom={getRoom} room={room}></CreateRoom>
             }
-            <Nearby nearby={nearby} socket={socketRef.current}></Nearby>
+            <Nearby nearby={nearby} socket={socketRef.current} connectNearby={connectNearby}></Nearby>
             <Send room={room} socket={socketRef.current}></Send>
             <Receive room={room} socket={socketRef.current}></Receive>
+            <Footer></Footer>
         </div>
     )
 };

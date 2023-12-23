@@ -8,6 +8,7 @@ const Send = props => {
     const { room, socket } = props;
     const roomText = "Room: #" + room;
     const [file, setFile] = useState();
+    const [status, setStatus] = useState('Send');
 
     const changeFile = (filename) => {
         setFile(filename);
@@ -16,6 +17,7 @@ const Send = props => {
     // const onFileChange = useCallback(files => setFile(files[0]), []);
     const sendFile = () => {
         console.log('Sending file to Room: ', room);
+        setStatus('Sending');
         if (file && socket) {
             console.log('file: ',file);
             let reader = new FileReader();
@@ -60,12 +62,14 @@ const Send = props => {
             chunk = buffer.slice(0, metadata.buffer_size);
         };
         // setFile(null);
+        setStatus('Sent');
         console.log("-- Sent File Successfully")
 
     }
 
     const resetFile = () => {
         setFile(null);
+        setStatus('Send');
     }
 
     return (
@@ -79,7 +83,7 @@ const Send = props => {
                             <img className="refresh-icon" src="/refresh.svg" alt="refresh-file"/>
                         </div>
                     </div>
-                    <button className="fs-btn" onClick={sendFile}>Send</button>
+                    <button className="fs-btn" onClick={sendFile}>{status}</button>
                 </div>
             ) : (<DragDropFiles changeFile={changeFile}></DragDropFiles>)}
         </div>

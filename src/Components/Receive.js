@@ -1,6 +1,7 @@
 import { Card } from "@mui/joy";
 import React, { useCallback, useState, useEffect } from "react";
 import './style.css'
+import ReceivedItem from "./ReceivedItem";
 
 const downloadFile = (blob, fileName) => {
     const link = document.createElement('a');
@@ -18,47 +19,51 @@ const downloadFile = (blob, fileName) => {
 
 const Receive = props => {
     const [meta, setMeta] = useState(null);
+    const [progress, setProgress] = useState(0);
+    const [fileBlob, setFileBlob] = useState(null);
     const { room, socket } = props;
     useEffect(() => {
-        
-        // const [meta, setMeta] = useState(null);
-
-        console.log('Receive Room: ', room, socket, meta);
         if (!room || !socket) return;
 
         let filedata = {};
-        let counter = 0;
 
         socket.on("rs-meta", data => {
-            // setMeta(data);
+            setMeta(data);
             // do something about useState for metadata
             filedata.metadata = data;
             filedata.transmitted = 0;
             filedata.buffer = new Array();
-            console.log("Received MetaData: ", data);
+            console.log("Meta: ", data);
         })
 
         socket.on("file-receive", data => {
-            counter += 1;
-            console.log("Received Buffer: ", filedata, counter);
             filedata.buffer.push(data);
             filedata.transmitted += data.byteLength;
+            setProgress(Math.floor(filedata.transmitted / filedata.metadata.total_buffer_size * 100));
             
             if (filedata.transmitted == filedata.metadata.total_buffer_size) {
                 console.log('Donloadable file:', filedata);
-                const resfile = new Blob(filedata.buffer);
-                downloadFile(resfile, filedata.metadata.filename);
+                // const resfile = new Blob(filedata.buffer);
+                setFileBlob(new Blob(filedata.buffer));
+                // downloadFile(resfile, filedata.metadata.filename);
                 filedata = {};
-                counter = 0;
             } else {
                 socket.emit("fs-start", room);
             }
         })
     }, [room, socket]);
 
+    const downloadHandle = () => {
+        if (fileBlob != null) {
+            downloadFile(fileBlob, meta.filename);
+            setFileBlob(null);
+            setMeta(null);
+        }
+    }
     return (
-        <div className="rs-screen">
-            {/* (meta!=null ? <div><p>{meta.filename}</p></div> : <div> </div>) */}
+        <div className="rs-screen" onClick={downloadHandle}>
+            <h2 className="js-name">Received Items</h2>
+            {meta != null ? <ReceivedItem name={meta.filename} percentage={progress}></ReceivedItem> : <div> </div> }
         </div>
     )
 }

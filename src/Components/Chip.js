@@ -4,7 +4,7 @@ import './style.css'
 const Chip = props => {
     const { roomId } = props;
     return (
-        <div class="chip">
+        <div className="chip">
             <p>{roomId}</p>
         </div>
 

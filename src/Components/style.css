@@ -15,6 +15,10 @@
     --tokyo-white: rgb(255, 255, 255);
     --foreground: #e0e5fd;
     --tokyo-magenta: #bb9af7;
+    --tokyo-teal: rgb(114, 189, 177);
+    --tokyo-green: #6ace90;
+    --tokyo-blue: #79c1eb;
+    --tokyo-blue-tp: #79c1eb79;
 }
 
 * {
@@ -86,10 +90,11 @@ body {
     margin: 5px;
     height: 40px;
     width: 94px;
+    font-size: 12px;
     background-color: var(--tokyo-button);
     color: var(--tokyo-text);
     border-style: none;
-    border-radius: 0px;
+    border-radius: 2px;
 }
 
 .join-btn:hover {
@@ -110,7 +115,8 @@ body {
 
 .join-screen .join-input {
     width: 100%;
-    border: 1px dashed var(--tokyo-border);
+    border-radius: 2px;
+    /* border: 1px dashed var(--tokyo-border); */
 }
 
 .fs-screen {
@@ -207,7 +213,7 @@ body {
 
 .rs-screen {
     width: auto;
-    min-height: 200px;
+    /* min-height: 200px; */
     margin: 20px;
     padding: 20px;
     border: 1px solid var(--tokyo-border);
@@ -237,6 +243,7 @@ body {
 }
 .file-text {
     height: 100%;
+    width: 80%;
     margin: 5px;
     position: relative;
     display: inline-block;
@@ -244,6 +251,9 @@ body {
     color: var(--tokyo-comment);
     text-align: center;
     vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .js-screen {
     width: auto;
@@ -256,6 +266,8 @@ body {
     color: var(--tokyo-comment);
     margin: 5px;
     text-align: left;
+    font-size: 18px;
+    cursor: pointer;
 }
 .chip {
     display: inline-block;
@@ -266,4 +278,100 @@ body {
     text-align: center;
     border-radius: 25px;
     background-color: var(--tokyo-comment);
+    cursor: pointer;
+}
+
+.rsi-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    height: 50%;
+    width: 100%;
+    /* border: 1px dotted var(--tokyo-border); */
+    align-items: center;
+    cursor: pointer;
+}
+
+.download-file {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.download-p {
+    margin: 10px;
+    font-size: 12px;
+    color: var(--tokyo-comment);
+    text-align: center;
+}
+
+.progressbar {
+    height: 100px;
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-copyright {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+}
+.footer-heart {
+    width: 100%;
+    margin-bottom: 12px;
+    text-align: center;
+    color: var(--tokyo-comment);
+    font-size: 10px;
+}
+
+.footer-heart a {
+    color: var(--tokyo-magenta);
+    padding-bottom: .25em;
+    text-decoration: none;
+}
+
+.footer-heart a:hover {
+    color: var(--tokyo-magenta);
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%23453886' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
+    background-position: bottom;
+    background-repeat: repeat-x;
+    background-size: 20%;
+    border-bottom: 0;
+    padding-bottom: .3em;
+    text-decoration: none;
+}
+
+.emoji {
+    vertical-align: middle;
+}
+
+/* progress bar */
+
+.CircularProgressbar {
+    width: 100%;
+    vertical-align: middle;
+}
+.CircularProgressbar .CircularProgressbar-text {
+    fill: var(--tokyo-white);
+    font-size: 24px;
+    font-weight: 800;
+    dominant-baseline: middle;
+    text-anchor: middle;
+}
+.CircularProgressbar-path {
+    stroke: var(--tokyo-green);
+}
+
+.CircularProgressbar-trail {
+    /* stroke: var(--tokyo-blue-tp); */
+}
+
+.CircularProgressbar-text {
+    fill: var(--tokyo-teal);
 }
