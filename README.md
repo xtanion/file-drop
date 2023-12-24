@@ -31,6 +31,7 @@ Site should be up and running at [localhost:3000]()
 ## Preview
 ![Untitled design](https://github.com/xtanion/file-drop/assets/74976752/9876c0ab-9d61-48f5-b00c-6793b7804b39)
 
-<div>
-  
-</div>
+## Todo
+- [ ] Sharing larger files
+- [ ] Dynamic blob allocation, (due to memory restrictions)
+- [ ] Encrypted byte array transfers
