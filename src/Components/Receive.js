@@ -32,19 +32,25 @@ const Receive = props => {
             // do something about useState for metadata
             filedata.metadata = data;
             filedata.transmitted = 0;
-            filedata.buffer = new Array();
+            // filedata.buffer = new Array();
+            filedata.blob = new Blob();
             console.log("Meta: ", data);
         })
 
+        // todo: send files in multiple of 2^x
+
         socket.on("file-receive", data => {
-            filedata.buffer.push(data);
+            // filedata.buffer.push(data);
+            filedata.blob = new Blob([filedata.blob, data]);
             filedata.transmitted += data.byteLength;
             setProgress(Math.floor(filedata.transmitted / filedata.metadata.total_buffer_size * 100));
             
             if (filedata.transmitted == filedata.metadata.total_buffer_size) {
                 console.log('Donloadable file:', filedata);
                 // const resfile = new Blob(filedata.buffer);
-                setFileBlob(new Blob(filedata.buffer));
+                // setFileBlob(new Blob(filedata.buffer));
+                setFileBlob(filedata.blob);
+                console.log(filedata.blob);
                 // downloadFile(resfile, filedata.metadata.filename);
                 filedata = {};
             } else {

@@ -15,6 +15,20 @@ const Send = props => {
     }
 
     // const onFileChange = useCallback(files => setFile(files[0]), []);
+    const divideChunk = (number) => {
+        if (number <= 0) {
+            return 0;
+        }
+
+        let msbPosition = 0;
+        while (number > 1) {
+            number >>= 1;
+            msbPosition++;
+        }
+
+        const nearestPower = 1 << msbPosition;
+        return nearestPower;
+    }
     const sendFile = () => {
         console.log('Sending file to Room: ', room);
         setStatus('Sending');
@@ -23,7 +37,9 @@ const Send = props => {
             let reader = new FileReader();
             reader.onload = (a) => {
                 let buffer = new Uint8Array(reader.result);
-                let bs = Math.max(buffer.length / 100, 1024);
+                // todo: send chunks in multiple of 2^x
+                let npw = divideChunk(buffer.length/100);
+                let bs = Math.max(npw, 1024);
                 const metadata = {
                     filename: file.name,
                     total_buffer_size: buffer.length,
