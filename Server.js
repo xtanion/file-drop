@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const http = require("http");
+const https = require('https');
 const { Server } = require("socket.io");
 const cors = require("cors");
 const fs = require('fs');
@@ -8,7 +8,14 @@ const fs = require('fs');
 
 app.use(cors());
 
-const server = http.createServer(app);
+const key = fs.readFileSync(__dirname + '/ssl-certs/private.key');
+const cert = fs.readFileSync(__dirname + '/ssl-certs/public.crt')
+var options = {
+    key: key,
+    cert: cert
+}
+
+const server = https.createServer(options, app);
 
 const io = new Server(server, {
     cors: {
@@ -37,6 +44,10 @@ io.on("connection", (socket) => {
 
     socket.on("file-send", function (data) {
         socket.to(data.uid).emit("file-receive", data.buffer);
+    });
+
+    socket.on('file-status', function (data) {
+        socket.to(data.uid).emit("receive-status", data.percentage);
     });
 });
 

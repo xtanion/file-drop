@@ -1,5 +1,5 @@
 import { Box, Card, CardContent } from "@mui/joy";
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import FileDrop from "./FileDrop";
 import DragDropFiles from "./FileDrop";
 import "./style.css"
@@ -91,7 +91,7 @@ const Send = props => {
     return (
         <div className="fs-screen">
             {file ? (
-                <div >
+                <div className="file-send">
                     <div className="uploads">
                         <div className="file-container" onClick={resetFile}>
                             <img className="file-icon" src="/file.svg" alt="file-logo" />

@@ -4,21 +4,22 @@
     --white: #ffffff;
     --background: #0e0e11;
     --elem-background: #24283b;
-    --tokyo-border: #dde0ec;
+    --tokyo-border: #afb0b3c7;
     --tokyo-text: var(--white);
-    --tokyo-comment: #e0e5fd;
+    --tokyo-comment: rgb(226, 227, 233);
     --tokyo-container: #1b1b1f;
-    --tokyo-button: #565f89;
+    --tokyo-button: #0074FF;
     --tokyo-red: #f7768e;
     --tokyo-orange: #ff9e64;
     --tokyo-yellow: #e0af68;
     --tokyo-white: rgb(255, 255, 255);
     --foreground: #e0e5fd;
-    --tokyo-magenta: #bb9af7;
-    --tokyo-teal: rgb(114, 189, 177);
+    --tokyo-blue: #4595f7;
+    --tokyo-teal: rgb(178, 245, 235);
     --tokyo-green: #6ace90;
     --tokyo-blue: #79c1eb;
     --tokyo-blue-tp: #79c1eb79;
+    --radius: 10px;
 }
 
 * {
@@ -49,9 +50,12 @@ body {
     width: 100%;
     height: 100%;
     max-width: 500px;
-    border-left: 1px solid var(--background);
-    border-right: 1px solid var(--background);
     background: var(--background);
+}
+
+.centered-div {
+    display: flex;
+    flex-direction: column;
 }
 
 .join-code {
@@ -94,11 +98,11 @@ body {
     background-color: var(--tokyo-button);
     color: var(--tokyo-text);
     border-style: none;
-    border-radius: 2px;
+    border-radius: var(--radius);
 }
 
 .join-btn:hover {
-    background-color: var(--tokyo-magenta);
+    background-color: var(--tokyo-blue);
     color: var(--tokyo-text);
     transition: 0.5s;
 }
@@ -115,7 +119,7 @@ body {
 
 .join-screen .join-input {
     width: 100%;
-    border-radius: 2px;
+    border-radius: var(--radius);
     /* border: 1px dashed var(--tokyo-border); */
 }
 
@@ -124,8 +128,10 @@ body {
 }
 
 .fs-screen .file-input {
+    font-weight: 800;
     width: 100%;
     border: 1px solid var(--tokyo-border);
+    border-radius: var(--radius);
 }
 .container {
     display: flex;
@@ -135,7 +141,7 @@ body {
     margin: 0 auto;
     background-color: var(--tokyo-container);
     color: var(--tokyo-comment);
-    border-radius: 0px;
+    border-radius: var(--radius);
     height: 60px;
     padding: 0px 3px 0px 8px;
 }
@@ -145,10 +151,10 @@ body {
     width: 100%;
     padding: 40px 50px;
     text-align: center;
-    background: var(--tokyo-container);
     color: var(--tokyo-comment);
     font-size: 18px;
     cursor: pointer;
+    border-radius: var(--radius) var(--radius) 0 0;
 }
 
 .fs-screen .file-input input {
@@ -172,6 +178,7 @@ body {
     width: 33%;
     min-width: 200px;
     border: 1px solid #eee;
+    border-radius: var(--radius);
     box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.05);
 }
 
@@ -186,26 +193,28 @@ body {
     padding: 5px;
     font-size: 18px;
     border-top: 1px solid #eee;
+    border-radius: var(--radius);
 }
 
 .fs-btn {
-    margin-top: 2px;
     height: 40px;
     width: 100%;
     background-color: var(--tokyo-button);
     color: var(--white);
-    border-style: 1px solid var(--tokyo-border);
-    border-radius: 0px;
+    border-style: 0px solid var(--tokyo-border);
+    border-radius: 0 0 var(--radius) var(--radius);
+    overflow: hidden;
 }
 
 .fs-btn:hover {
-    background: var(--tokyo-magenta);
+    background: var(--tokyo-blue);
     transition: 0.5s;
 }
 
 .fs-btn:active {
     border: 1px solid var(--tokyo-border);
-    background-color: var(--tokyo-magenta);
+    border-radius: var(--radius);
+    background-color: var(--tokyo-blue);
     color: var(--tokyo-container);
     transform: scale(1.1);
     transition: 0.5s;
@@ -217,15 +226,26 @@ body {
     margin: 20px;
     padding: 20px;
     border: 1px solid var(--tokyo-border);
+    border-radius: var(--radius);
 }
 
+.file-send {
+    border: 1px solid var(--tokyo-border);
+    border-radius: var(--radius);
+}
+
+.uploads {
+    width: 100%;
+}
 .file-container {
     display: flex;
     justify-content: center;
     padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     height: 40px;
     width: 100%;
-    border: 1px solid var(--tokyo-border);
+    border-bottom: 0;
     align-items: start;
     cursor: pointer;
 }
@@ -261,6 +281,7 @@ body {
     margin: 20px;
     padding: 20px;
     border: 1px solid var(--tokyo-border);
+    border-radius: var(--radius);
 }
 .js-name {
     color: var(--tokyo-comment);
@@ -277,7 +298,7 @@ body {
     font-weight: 700;
     text-align: center;
     border-radius: 25px;
-    background-color: var(--tokyo-comment);
+    background-color: var(--tokyo-teal);
     cursor: pointer;
 }
 
@@ -331,13 +352,13 @@ body {
 }
 
 .footer-heart a {
-    color: var(--tokyo-magenta);
+    color: var(--tokyo-blue);
     padding-bottom: .25em;
     text-decoration: none;
 }
 
 .footer-heart a:hover {
-    color: var(--tokyo-magenta);
+    color: var(--tokyo-blue);
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%23453886' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
     background-position: bottom;
     background-repeat: repeat-x;

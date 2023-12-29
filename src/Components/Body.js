@@ -10,7 +10,7 @@ import './style.css'
 import Nearby from "./Nearby";
 import Footer from "./Footer";
 
-const SERVER_URL = "http://localhost:5000"
+const SERVER_URL = "https://localhost:5000"
 
 const RandomRoom = () => {
     return (Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000).toString();
@@ -72,7 +72,7 @@ const Body = props => {
         <div className="centered-div">
             {joined ?
                 <div className="join-screen">
-                    <h2 className="join-name">You have Joined: <span style={{color: "#bb9af7"}}>{room}</span></h2>
+                    <h2 className="join-name">You have Joined: <span style={{ color: "#0074FF"}}>{room}</span></h2>
                     <p className="join-p">refresh page to establish a new connection</p>
                 </div>
                 :

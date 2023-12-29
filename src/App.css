@@ -3,18 +3,6 @@
     --black: #000000;
     --white: #ffffff;
     --background: #0e0e11;
-    --elem-background: #24283b;
-    --tokyo-border: #dde0ec;
-    --tokyo-text: var(--white);
-    --tokyo-comment: #e0e5fd;
-    --tokyo-container: #1b1b1f;
-    --tokyo-button: #565f89;
-    --tokyo-red: #f7768e;
-    --tokyo-orange: #ff9e64;
-    --tokyo-yellow: #e0af68;
-    --tokyo-white: rgb(255, 255, 255);
-    --foreground: #e0e5fd;
-    --tokyo-magenta: #bb9af7;
 }
 
 * {
