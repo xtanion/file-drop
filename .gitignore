@@ -1,3 +1,8 @@
+.DS_Store
+
+frontend/.DS_Store
 frontend/.next
 frontend/node_modules
 frontend/package-lock.json
+
+backend/.DS_Store
