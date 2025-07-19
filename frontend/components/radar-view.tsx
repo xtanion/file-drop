@@ -6,6 +6,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 interface RadarViewProps {
   onPeerSelect: (peerId: string) => void
+  roomUsers: string[]
+  currentUsername: string
 }
 
 type Peer = {
@@ -17,50 +19,30 @@ type Peer = {
   angle: number // 0-360 degrees
 }
 
-// Sample data
-const generatePeers = () => {
-  const peerData: Peer[] = [
-    {
-      id: "1",
-      name: "Alex Chen",
-      avatar: "/placeholder-user.jpg",
-      initials: "AC",
-      distance: Math.random() * 0.5 + 0.5,
-      angle: Math.random() * 360,
-    },
-    {
-      id: "2",
-      name: "Taylor Kim",
-      avatar: "/placeholder-user.jpg",
-      initials: "TK",
-      distance: Math.random() * 0.5 + 0.5,
-      angle: Math.random() * 360,
-    },
-    {
-      id: "3",
-      name: "Morgan Lee",
-      avatar: "/placeholder-user.jpg",
-      initials: "ML",
-      distance: Math.random() * 0.5 + 0.5,
-      angle: Math.random() * 360,
-    },
-  ]
-  return peerData
+// Convert room users to peers
+const generatePeersFromRoomUsers = (roomUsers: string[], currentUsername: string) => {
+  const otherUsers = roomUsers.filter(user => user !== currentUsername)
+  
+  return otherUsers.map((username, index) => ({
+    id: username,
+    name: username,
+    avatar: "/placeholder-user.jpg",
+    initials: username.charAt(0).toUpperCase() + (username.charAt(1) || '').toUpperCase(),
+    distance: Math.random() * 0.5 + 0.5,
+    angle: (index * (360 / otherUsers.length)) + (Math.random() * 30 - 15), // Distribute evenly with some randomness
+  }))
 }
 
-export function RadarView({ onPeerSelect }: RadarViewProps) {
+export function RadarView({ onPeerSelect, roomUsers, currentUsername }: RadarViewProps) {
   const [peers, setPeers] = useState<Peer[]>([])
   const [showPeers, setShowPeers] = useState(false)
 
   useEffect(() => {
-    // Simulate peer discovery after a delay
-    const timer = setTimeout(() => {
-      setPeers(generatePeers())
-      setShowPeers(true)
-    }, 2000)
-
-    return () => clearTimeout(timer)
-  }, [])
+    // Generate peers from actual room users
+    const roomPeers = generatePeersFromRoomUsers(roomUsers, currentUsername)
+    setPeers(roomPeers)
+    setShowPeers(roomPeers.length > 0)
+  }, [roomUsers, currentUsername])
 
   // Calculate position based on polar coordinates
   const getPosition = (distance: number, angle: number) => {

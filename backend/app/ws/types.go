@@ -2,6 +2,7 @@ package ws
 
 type JoinRoomPayload struct {
 	RoomID string `json:"roomId"`
+	Username string `json:"username"`
 }
 
 type FileMetaPayload struct {

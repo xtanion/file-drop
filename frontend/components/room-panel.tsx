@@ -4,61 +4,84 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { X } from "lucide-react"
-import { motion } from "framer-motion"
 
 interface RoomPanelProps {
   onClose: () => void
+  onJoinRoom: (roomId: string) => void
+  username: string
 }
 
-export function RoomPanel({ onClose }: RoomPanelProps) {
-  const [roomName, setRoomName] = useState("")
+export function RoomPanel({ onClose, onJoinRoom, username }: RoomPanelProps) {
+  const [roomId, setRoomId] = useState("")
+
+  const handleJoinRoom = () => {
+    if (roomId.trim()) {
+      onJoinRoom(roomId.trim())
+      onClose()
+    }
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleJoinRoom()
+    } else if (e.key === 'Escape') {
+      onClose()
+    }
+  }
 
   return (
-    <motion.div
-      className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <motion.div
-        className="bg-background border border-blue-500/20 rounded-lg w-full max-w-md p-6"
-        initial={{ scale: 0.9, y: 20 }}
-        animate={{ scale: 1, y: 0 }}
-        exit={{ scale: 0.9, y: 20 }}
-      >
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-medium">Join Public Room</h2>
-          <Button variant="ghost" size="icon" onClick={onClose}>
-            <X className="h-5 w-5" />
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+      <div className="bg-gray-900 border border-gray-700 rounded-lg p-6 w-full max-w-md">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-semibold text-white">Join a Room</h3>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onClose}
+            className="h-8 w-8 p-0 text-gray-400 hover:text-gray-200"
+          >
+            <X className="h-4 w-4" />
           </Button>
         </div>
-
+        
         <div className="space-y-4">
-          <div className="space-y-2">
-            <label className="text-sm text-muted-foreground">Enter a room name to connect with others</label>
+          <div>
+            <label htmlFor="room-id" className="block text-sm font-medium text-gray-300 mb-2">
+              Room ID
+            </label>
             <Input
-              value={roomName}
-              onChange={(e) => setRoomName(e.target.value)}
-              placeholder="Room name (e.g., meeting-123)"
-              className="bg-background/50 border-blue-500/30 focus-visible:ring-blue-500/30"
+              id="room-id"
+              placeholder="Enter Room ID"
+              value={roomId}
+              onChange={(e) => setRoomId(e.target.value)}
+              onKeyPress={handleKeyPress}
+              className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
+              autoFocus
             />
           </div>
-
-          <p className="text-xs text-muted-foreground">
-            Anyone with the same room name can discover and connect with you, even on different networks.
-          </p>
-
-          <div className="flex justify-end gap-2">
-            <Button variant="ghost" onClick={onClose}>
+          
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              onClick={onClose}
+              className="flex-1 text-gray-300 border-gray-600 hover:bg-gray-800"
+            >
               Cancel
             </Button>
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white" disabled={!roomName.trim()}>
+            <Button
+              onClick={handleJoinRoom}
+              disabled={!roomId.trim()}
+              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
+            >
               Join Room
             </Button>
           </div>
         </div>
-      </motion.div>
-    </motion.div>
+        
+        <p className="text-xs text-gray-400 mt-4 text-center">
+          Press Enter to join, Escape to cancel
+        </p>
+      </div>
+    </div>
   )
 }
-
