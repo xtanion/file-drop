@@ -31,7 +31,8 @@ export const useWebSocket = (username: string) => {
   useEffect(() => {
     if (!username) return;
     // Browser automatically negotiates compression with server when EnableCompression is true
-    const ws = new WebSocket("ws://localhost:6969/ws");
+    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:6969/ws";
+    const ws = new WebSocket(wsUrl);
     
     // Optimize WebSocket settings for better performance
     ws.binaryType = 'arraybuffer'; // Use ArrayBuffer for binary data (more efficient than Blob)
